@@ -13,8 +13,8 @@ from API_Call1 import (
 from speechtotext import load_model, transcribe_audio
 
 # --- Paths ----
-FORM_FOLDER = "API_CALL_GUI/Forms"
-OUTPUT_FOLDER = "output"
+FORM_FOLDER = "Forms"
+OUTPUT_FOLDER = "Output"
 CHAT_LOG_FILE = "chat_log.json"
 
 # --- Global Session State ---
@@ -133,7 +133,7 @@ with gr.Blocks() as demo:
         type="filepath",
         label="🎤 Record your response"
     )
-    voice_btn = gr.Button("Record & Send")
+    voice_btn = gr.Button("Send")
 
     with gr.Row():
         download_json = gr.File(label="⬇️ Download JSON", visible=False)
