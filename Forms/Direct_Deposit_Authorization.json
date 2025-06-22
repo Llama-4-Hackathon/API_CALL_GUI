@@ -1,0 +1,68 @@
+{
+    "Last Name": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter your last name as it appears on your bank account."
+    },
+    "First Name": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter your first name as it appears on your bank account."
+    },
+    "Middle Initial": {
+        "Value": "",
+        "Type": "text",
+        "Required": false,
+        "Options": [],
+        "Description": "Enter your middle initial if applicable."
+    },
+    "Bank Name and Branch": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the name and branch of your bank."
+    },
+    "Bank Account Number": {
+        "Value": "",
+        "Type": "number",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter your bank account number."
+    },
+    "Bank Routing Number": {
+        "Value": "",
+        "Type": "number",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter your bank's routing number."
+    },
+    "Account Type": {
+        "Value": "",
+        "Type": "choice",
+        "Required": true,
+        "Options": [
+            "Checking Account",
+            "Savings Account"
+        ],
+        "Description": "Select the type of your bank account."
+    },
+    "Employee Signature": {
+        "Value": "",
+        "Type": "signature",
+        "Required": true,
+        "Options": [],
+        "Description": "Sign to authorize direct deposit."
+    },
+    "Date": {
+        "Value": "",
+        "Type": "date",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the date you signed the authorization."
+    }
+}

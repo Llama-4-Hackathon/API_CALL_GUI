@@ -2,3 +2,8 @@ requests
 python-dotenv
 python-dateutil
 reportlab
+PyPDF2
+pdfplumber
+pdf2image
+gradio
+tqdm

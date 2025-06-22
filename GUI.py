@@ -140,6 +140,10 @@ with gr.Blocks() as demo:
                     outputs=[chatbox, user_input, download_json, download_pdf])
 
 # --- Launch ---
+def main():
+    os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+    demo.launch()
+
 if __name__ == "__main__":
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
     demo.launch()

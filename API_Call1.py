@@ -270,7 +270,7 @@ def process_user_message(user_input, conversation, answers, answer_file_path):
     # ✅ Handle exit
     if any(p in user_input.lower() for p in exit_phrases):
         save_json(answer_file_path, answers)
-        return "✅ Interview ended. Thank you for your responses!", conversation, answers, True
+        return "✅ Conversation ended. Thank you for your responses!", conversation, answers, True
 
     # ✅ Identify unanswered fields
     unanswered = [k for k, v in answers.items() if v.get("Value", "").strip() == ""]

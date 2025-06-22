@@ -1,0 +1,146 @@
+{
+    "Name": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter your full name."
+    },
+    "Student ID": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter your student ID number."
+    },
+    "Address": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter your mailing address."
+    },
+    "Phone": {
+        "Value": "",
+        "Type": "phone",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter your phone number."
+    },
+    "Date of Birth": {
+        "Value": "",
+        "Type": "date",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter your date of birth."
+    },
+    "Year": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the year for which you are requesting the release."
+    },
+    "Quarter": {
+        "Value": "",
+        "Type": "choice",
+        "Required": true,
+        "Options": [
+            "Fall",
+            "Winter",
+            "Spring"
+        ],
+        "Description": "Select the quarter for which you are requesting the release."
+    },
+    "Signature of Student": {
+        "Value": "",
+        "Type": "signature",
+        "Required": true,
+        "Options": [],
+        "Description": "Sign to confirm your request."
+    },
+    "Signature of Parent/Guardian": {
+        "Value": "",
+        "Type": "signature",
+        "Required": true,
+        "Options": [],
+        "Description": "Sign to confirm your consent."
+    },
+    "Date": {
+        "Value": "",
+        "Type": "date",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the date of signing."
+    },
+    "Name of School": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the name of your school."
+    },
+    "Address of School": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the address of your school."
+    },
+    "Contact Person": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the name of the contact person at your school."
+    },
+    "Phone of Contact Person": {
+        "Value": "",
+        "Type": "phone",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the phone number of the contact person."
+    },
+    "Email": {
+        "Value": "",
+        "Type": "email",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the email address of the contact person."
+    },
+    "Fax": {
+        "Value": "",
+        "Type": "text",
+        "Required": false,
+        "Options": [],
+        "Description": "Enter the fax number if available."
+    },
+    "Classes": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "List the classes for which you are requesting permission."
+    },
+    "Signature of School Official": {
+        "Value": "",
+        "Type": "signature",
+        "Required": true,
+        "Options": [],
+        "Description": "Sign to confirm the school's permission."
+    },
+    "Date of School Official": {
+        "Value": "",
+        "Type": "date",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the date of signing by the school official."
+    },
+    "Initials for Office Use": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter your initials for office processing."
+    }
+}

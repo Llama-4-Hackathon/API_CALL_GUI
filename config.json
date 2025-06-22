@@ -1,0 +1,6 @@
+{
+    "llama": {
+        "api-key": "LLM|1410738113506983|gJStl33Ho5ud_VdNwCUx9gNVmgo",
+        "model": "Llama-4-Maverick-17B-128E-Instruct-FP8"
+    }
+}

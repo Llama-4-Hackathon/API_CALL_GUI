@@ -1,0 +1,286 @@
+{
+    "Customer Name": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter your full name as it appears on your account."
+    },
+    "Account #": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Provide your account number associated with the claim."
+    },
+    "Mailing Address": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter your complete mailing address."
+    },
+    "Daytime Phone #": {
+        "Value": "",
+        "Type": "phone",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the daytime phone number of the witness."
+    },
+    "Email Address": {
+        "Value": "",
+        "Type": "email",
+        "Required": false,
+        "Options": [],
+        "Description": "Enter your email address if you wish to receive correspondence via email."
+    },
+    "Is There Other Comprehensive/Collision Insurance on This Vehicle": {
+        "Value": "",
+        "Type": "boolean",
+        "Required": true,
+        "Options": [
+            "Yes",
+            "No"
+        ],
+        "Description": "Indicate if you have other insurance coverage for the vehicle involved in the claim."
+    },
+    "If Yes, Insurance Company Name": {
+        "Value": "",
+        "Type": "text",
+        "Required": false,
+        "Options": [],
+        "Description": "If you answered 'Yes' to having other insurance, provide the name of the insurance company."
+    },
+    "Insurance Company Phone #": {
+        "Value": "",
+        "Type": "phone",
+        "Required": false,
+        "Options": [],
+        "Description": "Enter the phone number of the other insurance company."
+    },
+    "Policy #": {
+        "Value": "",
+        "Type": "text",
+        "Required": false,
+        "Options": [],
+        "Description": "Provide the policy number of the other vehicle's insurance."
+    },
+    "Vehicle Year": {
+        "Value": "",
+        "Type": "number",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the year of the vehicle involved in the claim."
+    },
+    "Make": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the make of the vehicle involved in the claim."
+    },
+    "Model": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the model of the vehicle involved in the claim."
+    },
+    "VIN / Serial #": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Provide the Vehicle Identification Number (VIN) or serial number of the vehicle."
+    },
+    "Date of Loss": {
+        "Value": "",
+        "Type": "date",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the date when the loss or incident occurred."
+    },
+    "Were You at Fault in the Accident": {
+        "Value": "",
+        "Type": "boolean",
+        "Required": true,
+        "Options": [
+            "Yes",
+            "No"
+        ],
+        "Description": "Indicate if you were at fault in the accident."
+    },
+    "Address Where Loss Occurred": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the address where the loss or incident took place."
+    },
+    "City": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the city of the witness's address."
+    },
+    "State": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the state of the witness's address."
+    },
+    "Zip": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the zip code of the driver's address."
+    },
+    "Is Vehicle Drivable": {
+        "Value": "",
+        "Type": "boolean",
+        "Required": true,
+        "Options": [
+            "Yes",
+            "No"
+        ],
+        "Description": "Indicate if the vehicle is drivable after the incident."
+    },
+    "State Where Vehicle Registered": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the state where the vehicle is registered."
+    },
+    "Current Location of Vehicle": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Provide the current location of the vehicle."
+    },
+    "Address": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the address of the witness."
+    },
+    "Phone #": {
+        "Value": "",
+        "Type": "phone",
+        "Required": false,
+        "Options": [],
+        "Description": "Enter the phone number of the other vehicle's insurance company."
+    },
+    "In Your Own Words, Describe How Loss Occurred": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Provide a detailed description of how the loss or incident occurred."
+    },
+    "Police/Fire Dept Notified": {
+        "Value": "",
+        "Type": "boolean",
+        "Required": true,
+        "Options": [
+            "Yes",
+            "No"
+        ],
+        "Description": "Indicate if the police or fire department was notified about the incident."
+    },
+    "If Yes, Police/Fire Dept Report #": {
+        "Value": "",
+        "Type": "text",
+        "Required": false,
+        "Options": [],
+        "Description": "If you answered 'Yes', provide the report number from the police or fire department."
+    },
+    "Dept Name": {
+        "Value": "",
+        "Type": "text",
+        "Required": false,
+        "Options": [],
+        "Description": "Enter the name of the police or fire department that was notified."
+    },
+    "Claimant Name": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the claimant's full name."
+    },
+    "Account#": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Provide the account number associated with the claimant."
+    },
+    "Was Other Vehicle Insured": {
+        "Value": "",
+        "Type": "boolean",
+        "Required": true,
+        "Options": [
+            "Yes",
+            "No"
+        ],
+        "Description": "Indicate if the other vehicle involved in the incident was insured."
+    },
+    "If Yes, Are You Making a Claim Against Other Owner's Insurance Company": {
+        "Value": "",
+        "Type": "boolean",
+        "Required": false,
+        "Options": [
+            "Yes",
+            "No"
+        ],
+        "Description": "If the other vehicle was insured, indicate if you are making a claim against their insurance company."
+    },
+    "Other Owner's Insurance Company Name": {
+        "Value": "",
+        "Type": "text",
+        "Required": false,
+        "Options": [],
+        "Description": "Enter the name of the other vehicle's insurance company."
+    },
+    "Owner of Other Vehicle": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the name of the owner of the other vehicle involved."
+    },
+    "Driver of Other Vehicle": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the name of the driver of the other vehicle."
+    },
+    "Name of Witness to Accident": {
+        "Value": "",
+        "Type": "text",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the name of any witness to the accident."
+    },
+    "Claimant Signature": {
+        "Value": "",
+        "Type": "signature",
+        "Required": true,
+        "Options": [],
+        "Description": "Sign the form to acknowledge the information provided is accurate."
+    },
+    "Date": {
+        "Value": "",
+        "Type": "date",
+        "Required": true,
+        "Options": [],
+        "Description": "Enter the date you signed the form."
+    }
+}
