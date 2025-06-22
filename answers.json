@@ -1,0 +1,32 @@
+{
+  "Name": {
+    "Value": "rahul",
+    "Type": "text",
+    "Required": true,
+    "Options": []
+  },
+  "Student ID": {
+    "Value": "12121",
+    "Type": "text",
+    "Required": true,
+    "Options": []
+  },
+  "Address": {
+    "Value": "",
+    "Type": "text",
+    "Required": true,
+    "Options": []
+  },
+  "Phone": {
+    "Value": "",
+    "Type": "phone",
+    "Required": false,
+    "Options": []
+  },
+  "Date of Birth": {
+    "Value": "",
+    "Type": "date",
+    "Required": false,
+    "Options": []
+  }
+}

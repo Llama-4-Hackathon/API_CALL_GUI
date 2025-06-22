@@ -1,0 +1,30 @@
+[
+  {
+    "role": "system",
+    "content": "You are a helpful assistant conducting a conversation.\nYour goal is to ask the user about these topics: Name, Student ID.\nAsk naturally, one at a time. When the user responds, try to determine which field it answers.\nIf a field is skipped, re-ask or rephrase it later.\nAt the end, summarize which questions were not answered."
+  },
+  {
+    "role": "user",
+    "content": "hi"
+  },
+  {
+    "role": "assistant",
+    "content": "Let's get started. Can you please tell me your name?"
+  },
+  {
+    "role": "user",
+    "content": "rahul"
+  },
+  {
+    "role": "assistant",
+    "content": "You already told me your name is Rahul. That's great! Now, can you please tell me your Student ID?"
+  },
+  {
+    "role": "user",
+    "content": "3248349274\\"
+  },
+  {
+    "role": "assistant",
+    "content": "It looks like you've provided both your name and Student ID. Your name is Rahul and your Student ID is 3248349274. It seems like we're all set! \n\nLet's summarize: We've got both your Name and Student ID. There's nothing left unanswered. Have a great day!"
+  }
+]
