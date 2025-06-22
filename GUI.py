@@ -1,19 +1,21 @@
+import os
 import gradio as gr
-from API_Call import (
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from API_Call1 import (
     list_forms_in_folder,
     load_json,
     save_json,
     build_system_prompt,
     process_user_message
 )
-import os
 
-# Paths
+# --- Paths ---
 FORM_FOLDER = "forms"
 OUTPUT_FOLDER = "output"
 CHAT_LOG_FILE = "chat_log.json"
 
-# Global session state
+# --- Global Session State ---
 session = {
     "conversation": [],
     "answers": {},
@@ -21,6 +23,26 @@ session = {
     "answer_file_path": None
 }
 
+
+# --- Utility Functions ---
+
+def generate_pdf_from_answers(json_data, output_path):
+    c = canvas.Canvas(output_path, pagesize=letter)
+    width, height = letter
+    text = c.beginText(40, height - 50)
+    text.setFont("Helvetica", 12)
+    text.textLine("📝 Form Responses")
+    text.textLine("-----------------------------")
+
+    for key, value in json_data.items():
+        val = value.get("Value", "N/A")
+        text.textLine(f"{key}: {val}")
+
+    c.drawText(text)
+    c.save()
+
+
+# --- Form Initialization ---
 
 def initialize_session():
     form_files = list_forms_in_folder(FORM_FOLDER)
@@ -31,8 +53,9 @@ def initialize_session():
 def start_form(selected_form):
     form_file = f"{selected_form.replace(' ', '_')}.json"
     form_path = os.path.join(FORM_FOLDER, form_file)
+
     if not os.path.exists(form_path):
-        return [{"role": "assistant", "content": f"❌ Could not find the form: {selected_form}"}], "", None
+        return [{"role": "assistant", "content": f"❌ Could not find the form: {selected_form}"}], "", None, None
 
     session["form_name"] = selected_form
     session["answers"] = load_json(form_path)
@@ -48,12 +71,14 @@ def start_form(selected_form):
         "content": f"Let's begin. Could you tell me your {first_field.lower()}?"
     })
 
-    return session["conversation"], f"📝 Started form: {selected_form}", None
+    return session["conversation"], f"📝 Started form: {selected_form}", None, None
 
+
+# --- Chat Interaction ---
 
 def chat_interface(user_input, chat_history):
     if not user_input.strip():
-        return chat_history, "", gr.update(value=None, visible=False)
+        return chat_history, "", gr.update(value=None, visible=False), gr.update(value=None, visible=False)
 
     msg, updated_conv, updated_answers, done = process_user_message(
         user_input,
@@ -68,16 +93,24 @@ def chat_interface(user_input, chat_history):
     chat_history.append({"role": "user", "content": user_input})
     chat_history.append({"role": "assistant", "content": msg})
 
+    json_file = gr.update(value=None, visible=False)
+    pdf_file = gr.update(value=None, visible=False)
+
     if done:
         save_json(session["answer_file_path"], session["answers"])
         save_json(CHAT_LOG_FILE, session["conversation"])
-        return chat_history, "", gr.update(value=session["answer_file_path"], visible=True)
 
-    return chat_history, "", gr.update(value=None, visible=False)
+        pdf_path = session["answer_file_path"].replace(".json", ".pdf")
+        generate_pdf_from_answers(session["answers"], pdf_path)
+
+        json_file = gr.update(value=session["answer_file_path"], visible=True)
+        pdf_file = gr.update(value=pdf_path, visible=True)
+
+    return chat_history, "", json_file, pdf_file
 
 
+# --- UI Setup ---
 
-# UI setup
 with gr.Blocks() as demo:
     gr.Markdown("## 📝 AI-Powered Form Filler")
 
@@ -86,18 +119,27 @@ with gr.Blocks() as demo:
         start_btn = gr.Button("Start Conversation")
 
     chatbox = gr.Chatbot(label="Conversation", type="messages")
-    user_input = gr.Textbox(label="Your message")
-    clear_btn = gr.Button("Clear Chat")
+    user_input = gr.Textbox(label="Your message", placeholder="Type your response and press Enter")
 
-    status = gr.Markdown()
-    download_output = gr.File(label="⬇️ Download Completed Form", visible=False)
+    with gr.Row():
+        download_json = gr.File(label="⬇️ Download JSON", visible=False)
+        download_pdf = gr.File(label="⬇️ Download PDF", visible=False)
 
-    # Events
-    start_btn.click(fn=start_form, inputs=form_selector, outputs=[chatbox, status, download_output])
-    user_input.submit(fn=chat_interface, inputs=[user_input, chatbox], outputs=[chatbox, user_input, download_output])
-    clear_btn.click(lambda: ([], "", None), outputs=[chatbox, user_input, download_output])
+    with gr.Row():
+        clear_btn = gr.Button("Clear Chat")
+        status = gr.Markdown()
 
-# Launch
+    # Event Bindings
+    start_btn.click(fn=start_form, inputs=form_selector,
+                    outputs=[chatbox, status, download_json, download_pdf])
+
+    user_input.submit(fn=chat_interface, inputs=[user_input, chatbox],
+                      outputs=[chatbox, user_input, download_json, download_pdf])
+
+    clear_btn.click(lambda: ([], "", gr.update(value=None, visible=False), gr.update(value=None, visible=False)),
+                    outputs=[chatbox, user_input, download_json, download_pdf])
+
+# --- Launch ---
 if __name__ == "__main__":
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
     demo.launch()

@@ -17,11 +17,11 @@
   },
   {
     "role": "assistant",
-    "content": "Hey there! \ud83d\udc4b Nice to meet you! Let's get this form filled out, shall we? \ud83d\ude0a To start, could you please tell me your name?"
+    "content": "Hey there! \ud83d\udc4b Nice to meet you! Let's get this form filled out, shall we? \ud83d\ude0a To start, could you please tell me your name? I'm all ears!"
   },
   {
     "role": "user",
-    "content": "rahul"
+    "content": "rahul king koong"
   },
   {
     "role": "user",
@@ -29,10 +29,54 @@
   },
   {
     "role": "assistant",
-    "content": "Now that we've got your name, Rahul, let's get some more details! \ud83d\udcdd You're doing great so far! Next up, what's your Student ID? I'm guessing it's not a secret agent number, right? \ud83d\udd75\ufe0f\u200d\u2642\ufe0f"
+    "content": "Now that we've got your name, Rahul King Koong (love the alliteration, by the way \ud83d\ude04), let's move on to something a bit more... official. What's your Student ID? I'm guessing it's not as cool as your name, but we need it anyway \ud83d\ude09."
   },
   {
     "role": "user",
-    "content": "bbbye"
+    "content": "123123123"
+  },
+  {
+    "role": "user",
+    "content": "Cool! Now let's smoothly continue. Out of the remaining fields: Address, Phone, Date of Birth, what\u2019s a fun or casual way to ask about the next one \u2014 without repeating the last response? Keep it witty, friendly, maybe throw in an emoji or two if it fits!"
+  },
+  {
+    "role": "assistant",
+    "content": "The numbers game is strong with you, I see! \ud83d\ude02 Now, let's get to the important stuff \u2013 where you live! \ud83c\udfe0 What's your address? Don't worry, I won't send you any junk mail... I promise! \ud83d\udce8"
+  },
+  {
+    "role": "user",
+    "content": "123 pink city was"
+  },
+  {
+    "role": "user",
+    "content": "Cool! Now let's smoothly continue. Out of the remaining fields: Phone, Date of Birth, what\u2019s a fun or casual way to ask about the next one \u2014 without repeating the last response? Keep it witty, friendly, maybe throw in an emoji or two if it fits!"
+  },
+  {
+    "role": "assistant",
+    "content": "So you're from the lovely Pink City, eh? \ud83c\udf38 Sounds like a pretty cool place! Now, let's get in touch - literally! \ud83d\udcf1 Can you share your phone number with me? Don't worry, I won't call you at weird hours... unless it's an emergency, of course!"
+  },
+  {
+    "role": "user",
+    "content": "123123"
+  },
+  {
+    "role": "user",
+    "content": "Cool! Now let's smoothly continue. Out of the remaining fields: Date of Birth, what\u2019s a fun or casual way to ask about the next one \u2014 without repeating the last response? Keep it witty, friendly, maybe throw in an emoji or two if it fits!"
+  },
+  {
+    "role": "assistant",
+    "content": "It looks like your phone number didn't quite make it through - I got an \"Invalid input\" message \ud83e\udd14. Could you try again, and let's make sure we get it right this time? \ud83d\udcf1 Maybe add the country code or check if there are any typos? I'm here to help!"
+  },
+  {
+    "role": "user",
+    "content": "9876541231"
+  },
+  {
+    "role": "assistant",
+    "content": "Yay, success! \ud83c\udf89 Now we've got your phone number sorted - 9876541231. You're just one step away from completing this form! To wrap things up, when's your birthday? \ud83c\udf82 I'm not planning a surprise party or anything (unless you want one, that is \ud83d\ude09), but we do need your Date of Birth."
+  },
+  {
+    "role": "user",
+    "content": "12 oct 1993"
   }
 ]
