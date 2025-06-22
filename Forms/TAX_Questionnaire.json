@@ -1,0 +1,62 @@
+{
+  "Filer Name": {
+    "Value": "",
+    "Type": "text",
+    "Required": true,
+    "Hint": "Please provide your full legal name as it appears on your government-issued ID."
+  },
+  "Annual Employment Income": {
+    "Value": "",
+    "Type": "float",
+    "Required": true,
+    "Hint": "Enter your total gross income earned from employment (W-2 or equivalent) in the last calendar year."
+  },
+  "Foreign Income": {
+    "Value": "",
+    "Type": "float",
+    "Required": false,
+    "Hint": "If you earned any income outside your home country (e.g., foreign bank accounts, jobs abroad), list the total amount. If none, say 'none'."
+  },
+  "Capital Gains or Losses": {
+    "Value": "",
+    "Type": "float",
+    "Required": false,
+    "Hint": "Report net gain or loss from the sale of stocks, real estate, or other investments. This can be a negative number if you had losses."
+  },
+  "Did You Have Health Insurance All Year?": {
+    "Value": "",
+    "Type": "boolean",
+    "Required": true,
+    "Hint": "Answer 'yes' if you had qualifying health coverage every month last year. Otherwise, answer 'no'."
+  },
+  "Total Itemized Deductions": {
+    "Value": "",
+    "Type": "float",
+    "Required": false,
+    "Hint": "If you’re not taking the standard deduction, list the total of your itemized deductions (e.g., mortgage interest, charity, state taxes)."
+  },
+  "Claiming Dependents": {
+    "Value": "",
+    "Type": "int",
+    "Required": false,
+    "Hint": "How many dependents are you claiming this year? Dependents include children or others you financially support."
+  },
+  "Spouse Income (if married)": {
+    "Value": "",
+    "Type": "float",
+    "Required": false,
+    "Hint": "If filing jointly, include your spouse’s gross income for the year. Otherwise, enter '0'."
+  },
+  "Did You Contribute to Retirement Accounts?": {
+    "Value": "",
+    "Type": "boolean",
+    "Required": false,
+    "Hint": "Answer 'yes' if you contributed to any IRA, 401(k), or similar retirement account during the year."
+  },
+  "Digital Signature": {
+    "Value": "",
+    "Type": "signature",
+    "Required": true,
+    "Hint": "Type your full name to certify the information is true to the best of your knowledge."
+  }
+}

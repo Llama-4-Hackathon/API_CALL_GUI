@@ -3,6 +3,7 @@ import json
 import requests
 from dotenv import load_dotenv
 from dateutil.parser import parse as parse_date
+import re
 
 load_dotenv()
 
@@ -15,6 +16,34 @@ OUTPUT_FOLDER = "output"
 CHAT_LOG_FILE = "chat_log.json"
 
 # ---------------- UTILITIES ----------------
+
+def clean_value(raw_value, expected_type):
+    if raw_value is None:
+        return None
+
+    val = raw_value.strip().lower()
+
+    if expected_type == "boolean":
+        if any(p in val for p in ["yes", "yeah", "yep", "true", "of course"]):
+            return "yes"
+        if any(p in val for p in ["no", "nope", "nah", "false"]):
+            return "no"
+
+    if expected_type == "int":
+        try:
+            return str(int(float(val.replace(",", ""))))
+        except ValueError:
+            return None
+
+    if expected_type == "float":
+        try:
+            val = val.replace(",", "").replace("$", "")
+            return str(float(val))
+        except ValueError:
+            return None
+
+    return raw_value.strip()
+
 
 def load_json(filepath):
     with open(filepath, "r") as f:
@@ -43,22 +72,37 @@ def list_forms_in_folder(folder_path="forms"):
 
 def validate_answer(value, expected_type, options=None):
     expected_type = normalize_type(expected_type)
-    options = options or []
+    cleaned = clean_value(value, expected_type)
+
+    if cleaned is None:
+        return False
 
     if expected_type == "text":
-        return bool(value.strip())
+        return bool(cleaned)
+
     if expected_type == "int":
-        return value.isdigit()
+        return cleaned.isdigit()
+
+    if expected_type == "float":
+        try:
+            float(cleaned)
+            return True
+        except ValueError:
+            return False
+
     if expected_type == "datetime":
         try:
-            parse_date(value)
+            parse_date(cleaned)
             return True
         except Exception:
             return False
+
     if expected_type == "boolean":
-        return value.lower() in ["yes", "no"] or value.lower() in options
+        return cleaned in ["yes", "no"]
+
     if expected_type == "multichoice":
-        return value.lower() in [opt.lower() for opt in options]
+        return cleaned.lower() in [opt.lower() for opt in options or []]
+
     return False
 
 # ---------------- LLaMA API ----------------
@@ -131,20 +175,38 @@ def ask_llama_to_match_field(conversation, user_input, unanswered_fields, answer
 # ---------------- ANSWER CLEANING ----------------
 
 def extract_clean_answer(conversation, field_name, field_info, user_input, answers):
+    expected_type = field_info["Type"]
+
+    # Try local cleaning first (avoid LLM when we can)
+    cleaned = clean_value(user_input, expected_type)
+    if validate_answer(cleaned, expected_type, field_info.get("Options")):
+        return cleaned
+
+    # Otherwise ask LLM to clean it strictly
     prompt = (
-        f"The user was asked about: '{field_name}'.\nExpected type: {field_info['Type']}\n"
+        f"Extract ONLY the value for this form field.\n"
+        f"Field: {field_name}\n"
+        f"Expected Type: {expected_type}\n"
         f"Options: {', '.join(field_info.get('Options', [])) or 'N/A'}\n"
-        f"User response: \"{user_input}\"\n"
-        "Respond ONLY with the cleaned value. If invalid, respond: Invalid input"
+        f"User Input: \"{user_input}\"\n"
+        f"Rules:\n"
+        f"- Do NOT include any explanation, emoji, or commentary.\n"
+        f"- Do NOT add currency symbols, commas, or extra words.\n"
+        f"- Just return the raw number or answer.\n"
+        f"- If the input is clearly invalid, return exactly: Invalid input"
     )
+
     conversation.append({"role": "user", "content": prompt})
     response = chat_completion(conversation, answers)
     extracted = parse_response(response).strip()
     conversation.pop()
 
-    if validate_answer(extracted, field_info["Type"], field_info.get("Options")):
-        return extracted
+    cleaned = clean_value(extracted, expected_type)
+    if validate_answer(cleaned, expected_type, field_info.get("Options")):
+        return cleaned
+
     return None
+
 
 # ---------------- RETRY PROMPT ----------------
 
