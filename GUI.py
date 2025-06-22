@@ -9,9 +9,11 @@ from API_Call1 import (
     build_system_prompt,
     process_user_message
 )
+# Voice imports
+from speechtotext import load_model, transcribe_audio
 
-# --- Paths ---
-FORM_FOLDER = "forms"
+# --- Paths ----
+FORM_FOLDER = "API_CALL_GUI/Forms"
 OUTPUT_FOLDER = "output"
 CHAT_LOG_FILE = "chat_log.json"
 
@@ -23,6 +25,8 @@ session = {
     "answer_file_path": None
 }
 
+# Load Whisper model once for voice input
+audio_model = load_model()
 
 # --- Utility Functions ---
 
@@ -40,7 +44,6 @@ def generate_pdf_from_answers(json_data, output_path):
 
     c.drawText(text)
     c.save()
-
 
 # --- Form Initialization ---
 
@@ -73,15 +76,14 @@ def start_form(selected_form):
 
     return session["conversation"], f"📝 Started form: {selected_form}", None, None
 
+# --- Chat & Voice Interaction ---
 
-# --- Chat Interaction ---
-
-def chat_interface(user_input, chat_history):
-    if not user_input.strip():
-        return chat_history, "", gr.update(value=None, visible=False), gr.update(value=None, visible=False)
+def chat_interface(text_input, chat_history):
+    if not text_input.strip():
+        return text_input, chat_history
 
     msg, updated_conv, updated_answers, done = process_user_message(
-        user_input,
+        text_input,
         session["conversation"],
         session["answers"],
         session["answer_file_path"]
@@ -90,36 +92,48 @@ def chat_interface(user_input, chat_history):
     session["conversation"] = updated_conv
     session["answers"] = updated_answers
 
-    chat_history.append({"role": "user", "content": user_input})
+    chat_history = chat_history or []
+    chat_history.append({"role": "user", "content": text_input})
     chat_history.append({"role": "assistant", "content": msg})
-
-    json_file = gr.update(value=None, visible=False)
-    pdf_file = gr.update(value=None, visible=False)
 
     if done:
         save_json(session["answer_file_path"], session["answers"])
         save_json(CHAT_LOG_FILE, session["conversation"])
-
         pdf_path = session["answer_file_path"].replace(".json", ".pdf")
         generate_pdf_from_answers(session["answers"], pdf_path)
+        # expose downloads via gr.File
+        return "", chat_history, gr.update(value=session["answer_file_path"], visible=True), gr.update(value=pdf_path, visible=True)
 
-        json_file = gr.update(value=session["answer_file_path"], visible=True)
-        pdf_file = gr.update(value=pdf_path, visible=True)
+    return "", chat_history, gr.update(visible=False), gr.update(visible=False)
 
-    return chat_history, "", json_file, pdf_file
 
+def voice_interface(audio_file, chat_history):
+    if not audio_file:
+        return "", chat_history or []
+    text = transcribe_audio(audio_model, audio_file)
+    if not text:
+        return "", chat_history
+    return chat_interface(text, chat_history)
 
 # --- UI Setup ---
 
 with gr.Blocks() as demo:
-    gr.Markdown("## 📝 AI-Powered Form Filler")
+    gr.Markdown("## 📝 AI-Powered Form Filler with Voice Input")
 
     with gr.Row():
         form_selector = gr.Dropdown(label="Select a form", choices=initialize_session(), interactive=True)
         start_btn = gr.Button("Start Conversation")
 
     chatbox = gr.Chatbot(label="Conversation", type="messages")
-    user_input = gr.Textbox(label="Your message", placeholder="Type your response and press Enter")
+    text_input = gr.Textbox(label="Your message", placeholder="Type your response and press Enter")
+    send_btn = gr.Button("Send")
+
+    # Voice recorder (default dual-mode; record and upload)
+    mic = gr.Audio(
+        type="filepath",
+        label="🎤 Record your response"
+    )
+    voice_btn = gr.Button("Record & Send")
 
     with gr.Row():
         download_json = gr.File(label="⬇️ Download JSON", visible=False)
@@ -129,15 +143,23 @@ with gr.Blocks() as demo:
         clear_btn = gr.Button("Clear Chat")
         status = gr.Markdown()
 
-    # Event Bindings
-    start_btn.click(fn=start_form, inputs=form_selector,
+    # Bindings
+    start_btn.click(start_form, inputs=form_selector,
                     outputs=[chatbox, status, download_json, download_pdf])
 
-    user_input.submit(fn=chat_interface, inputs=[user_input, chatbox],
-                      outputs=[chatbox, user_input, download_json, download_pdf])
+    send_btn.click(chat_interface,
+                   inputs=[text_input, chatbox],
+                   outputs=[text_input, chatbox, download_json, download_pdf])
+    text_input.submit(chat_interface,
+                      inputs=[text_input, chatbox],
+                      outputs=[text_input, chatbox, download_json, download_pdf])
 
-    clear_btn.click(lambda: ([], "", gr.update(value=None, visible=False), gr.update(value=None, visible=False)),
-                    outputs=[chatbox, user_input, download_json, download_pdf])
+    voice_btn.click(voice_interface,
+                    inputs=[mic, chatbox],
+                    outputs=[text_input, chatbox, download_json, download_pdf])
+
+    clear_btn.click(lambda: ("", [], gr.update(visible=False), gr.update(visible=False)),
+                    outputs=[text_input, chatbox, download_json, download_pdf])
 
 # --- Launch ---
 def main():

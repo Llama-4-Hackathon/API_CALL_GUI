@@ -11,7 +11,7 @@ load_dotenv()
 
 API_URL = "https://api.llama.com/v1/chat/completions"
 MODEL_NAME = "Llama-4-Maverick-17B-128E-Instruct-FP8"
-FORM_FOLDER = "forms"
+FORM_FOLDER = "./Forms"
 OUTPUT_FOLDER = "output"
 CHAT_LOG_FILE = "chat_log.json"
 
@@ -61,7 +61,7 @@ def normalize_type(type_str):
     }.get(type_str.lower(), type_str.lower())
 
 
-def list_forms_in_folder(folder_path="forms"):
+def list_forms_in_folder(folder_path="./Forms"):
     return sorted([
         f for f in os.listdir(folder_path)
         if f.endswith(".json") and not f.startswith(".")
