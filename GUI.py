@@ -23,7 +23,6 @@ session = {
 
 
 def initialize_session():
-    # Load available forms
     form_files = list_forms_in_folder(FORM_FOLDER)
     form_names = [os.path.splitext(f)[0].replace("_", " ") for f in form_files]
     return form_names
@@ -33,7 +32,7 @@ def start_form(selected_form):
     form_file = f"{selected_form.replace(' ', '_')}.json"
     form_path = os.path.join(FORM_FOLDER, form_file)
     if not os.path.exists(form_path):
-        return [{"role": "assistant", "content": f"❌ Could not find the form: {selected_form}"}], ""
+        return [{"role": "assistant", "content": f"❌ Could not find the form: {selected_form}"}], "", None
 
     session["form_name"] = selected_form
     session["answers"] = load_json(form_path)
@@ -43,19 +42,18 @@ def start_form(selected_form):
     }]
     session["answer_file_path"] = os.path.join(OUTPUT_FOLDER, f"{selected_form.replace(' ', '_')}_answers.json")
 
-    # Start the conversation with first question
     first_field = list(session["answers"].keys())[0]
     session["conversation"].append({
         "role": "assistant",
         "content": f"Let's begin. Could you tell me your {first_field.lower()}?"
     })
 
-    return session["conversation"], f"📝 Started form: {selected_form}"
+    return session["conversation"], f"📝 Started form: {selected_form}", None
 
 
 def chat_interface(user_input, chat_history):
     if not user_input.strip():
-        return chat_history, ""
+        return chat_history, "", gr.update(value=None, visible=False)
 
     msg, updated_conv, updated_answers, done = process_user_message(
         user_input,
@@ -73,8 +71,10 @@ def chat_interface(user_input, chat_history):
     if done:
         save_json(session["answer_file_path"], session["answers"])
         save_json(CHAT_LOG_FILE, session["conversation"])
+        return chat_history, "", gr.update(value=session["answer_file_path"], visible=True)
 
-    return chat_history, ""
+    return chat_history, "", gr.update(value=None, visible=False)
+
 
 
 # UI setup
@@ -90,11 +90,12 @@ with gr.Blocks() as demo:
     clear_btn = gr.Button("Clear Chat")
 
     status = gr.Markdown()
+    download_output = gr.File(label="⬇️ Download Completed Form", visible=False)
 
     # Events
-    start_btn.click(fn=start_form, inputs=form_selector, outputs=[chatbox, status])
-    user_input.submit(fn=chat_interface, inputs=[user_input, chatbox], outputs=[chatbox, user_input])
-    clear_btn.click(lambda: ([], ""), outputs=[chatbox, user_input])
+    start_btn.click(fn=start_form, inputs=form_selector, outputs=[chatbox, status, download_output])
+    user_input.submit(fn=chat_interface, inputs=[user_input, chatbox], outputs=[chatbox, user_input, download_output])
+    clear_btn.click(lambda: ([], "", None), outputs=[chatbox, user_input, download_output])
 
 # Launch
 if __name__ == "__main__":

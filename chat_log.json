@@ -9,7 +9,19 @@
   },
   {
     "role": "user",
-    "content": "Rahul sihara"
+    "content": "hi"
+  },
+  {
+    "role": "user",
+    "content": "The user said: 'hi', which doesn't map clearly to a question.\nGreet the user and kindly start the form by asking about the field: 'Name' (type: text). Be friendly and natural."
+  },
+  {
+    "role": "assistant",
+    "content": "Hey there! \ud83d\udc4b Nice to meet you! Let's get this form filled out, shall we? \ud83d\ude0a To start, could you please tell me your name?"
+  },
+  {
+    "role": "user",
+    "content": "rahul"
   },
   {
     "role": "user",
@@ -17,46 +29,10 @@
   },
   {
     "role": "assistant",
-    "content": "Hey Rahul, nice to meet you! \ud83d\ude0a Now, let's get some more details. What's your secret student code, aka Student ID?"
+    "content": "Now that we've got your name, Rahul, let's get some more details! \ud83d\udcdd You're doing great so far! Next up, what's your Student ID? I'm guessing it's not a secret agent number, right? \ud83d\udd75\ufe0f\u200d\u2642\ufe0f"
   },
   {
     "role": "user",
-    "content": "12345"
-  },
-  {
-    "role": "user",
-    "content": "Cool! Now let's smoothly continue. Out of the remaining fields: Address, Phone, Date of Birth, what\u2019s a fun or casual way to ask about the next one \u2014 without repeating the last response? Keep it witty, friendly, maybe throw in an emoji or two if it fits!"
-  },
-  {
-    "role": "assistant",
-    "content": "You're a rockstar with a super simple Student ID \ud83d\ude09! Next up, where's home sweet home for you? What's your address?"
-  },
-  {
-    "role": "user",
-    "content": "i live at 123 aven bellvue, what about you"
-  },
-  {
-    "role": "user",
-    "content": "Cool! Now let's smoothly continue. Out of the remaining fields: Phone, Date of Birth, what\u2019s a fun or casual way to ask about the next one \u2014 without repeating the last response? Keep it witty, friendly, maybe throw in an emoji or two if it fits!"
-  },
-  {
-    "role": "assistant",
-    "content": "Nice neighborhood! \ud83c\udf33 Now, so we can get in touch, what's your phone number? Don't worry, I won't call you at 6 am \ud83d\ude02."
-  },
-  {
-    "role": "user",
-    "content": "1234312345"
-  },
-  {
-    "role": "user",
-    "content": "Cool! Now let's smoothly continue. Out of the remaining fields: Date of Birth, what\u2019s a fun or casual way to ask about the next one \u2014 without repeating the last response? Keep it witty, friendly, maybe throw in an emoji or two if it fits!"
-  },
-  {
-    "role": "assistant",
-    "content": "You're all connected now \ud83d\udcf1! Last but not least, when's your birthday? We're not planning a surprise party... or are we \ud83c\udf89?"
-  },
-  {
-    "role": "user",
-    "content": "2 oct 1993"
+    "content": "bbbye"
   }
 ]
